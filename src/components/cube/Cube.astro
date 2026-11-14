@@ -1,0 +1,40 @@
+---
+import '../../style.css';
+import { cubeMarkup, cubeText } from '../../ui.ts';
+import type { CubeLanguage } from '../../module.ts';
+
+interface Props {
+  language: CubeLanguage;
+}
+
+const { language } = Astro.props;
+const text = cubeText[language];
+---
+
+<cube-module class="cube-app" data-cube-app data-language={language} lang={language} role="region" aria-label={text.region} tabindex="0">
+  <Fragment set:html={cubeMarkup(language)} />
+  <noscript><p>{text.noScript}</p></noscript>
+</cube-module>
+
+<script>
+  import { mountCube } from '../../main.ts';
+
+  // Connected/disconnected callbacks also cover Astro client-side navigation,
+  // persisted elements, and multiple component instances without page listeners.
+  if (!customElements.get('cube-module')) {
+    customElements.define('cube-module', class extends HTMLElement {
+      private destroyCube?: () => void;
+
+      connectedCallback() {
+        this.destroyCube = mountCube(this, {
+          language: this.dataset.language === 'zh-CN' ? 'zh-CN' : 'en',
+        });
+      }
+
+      disconnectedCallback() {
+        this.destroyCube?.();
+        this.destroyCube = undefined;
+      }
+    });
+  }
+</script>
