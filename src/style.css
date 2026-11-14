@@ -108,10 +108,6 @@
   .cube-app .stage-top { padding-bottom: 0; }
   .cube-app .stage-bottom { padding-top: 0; }
 }
-@container cube (max-width: 25rem) {
-  .cube-app .tools { grid-template-columns: 1fr; }
-  .cube-app .controls { grid-template-columns: 1fr; }
-}
 @media (prefers-reduced-motion: no-preference) {
   .cube-app button { transition: border-color 150ms ease, color 150ms ease; }
 }
