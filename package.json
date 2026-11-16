@@ -7,7 +7,9 @@
     "dev": "vite --host 0.0.0.0",
     "quality": "tsc --noEmit && tsx scripts/verify.ts",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview --host 0.0.0.0"
+    "preview": "vite preview --host 0.0.0.0",
+    "research": "node --experimental-strip-types scripts/research/run.ts",
+    "research:verify": "node --experimental-strip-types scripts/research/verify.ts"
   },
   "peerDependencies": {
     "astro": "^7.2.10"
