@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
-import { IDS, POSITIONS, FRAMES, FACE_AXIS, TABLES, applyMove, solvedState, assertLegal, isSolved, mod3, type Eight, type Face, type Orientation, type Vector } from '../src/cube.ts';
+import { IDS, POSITIONS, FRAMES, FACE_AXIS, TABLES, applyMove, solvedState, assertLegal, isSolved, mod3, type Face, type Vector } from '../src/cube.ts';
 import { RINGS, SLOTS, directedArc } from '../src/layout.ts';
+import { rankPermutation, unrankPermutation, rankOrientation, unrankOrientation } from './research/codec.ts';
 
 const faces: Face[] = ['F', 'U', 'R'];
 for (const face of faces) {
@@ -78,41 +79,6 @@ for (const [face, slot] of [['F', 6], ['U', 5]] as const) {
 }
 console.log('PASS: circle membership, directed forward/inverse arcs, G/F symmetry-axis intersections');
 
-const factorial = [1, 1, 2, 6, 24, 120, 720, 5040];
-function rankPermutation(permutation: number[]): number {
-  let rank = 0;
-  for (let i = 0; i < 7; i++) {
-    let smaller = 0;
-    for (let j = i + 1; j < 7; j++) if (permutation[j] < permutation[i]) smaller++;
-    rank += smaller * factorial[6 - i];
-  }
-  return rank;
-}
-function unrankPermutation(rank: number): Eight<number> {
-  const remaining = [0, 1, 2, 3, 4, 5, 6], result = [];
-  for (let i = 0; i < 7; i++) {
-    const index = Math.floor(rank / factorial[6 - i]);
-    rank %= factorial[6 - i];
-    result.push(remaining.splice(index, 1)[0]);
-  }
-  return [...result, 7] as Eight<number>;
-}
-function rankOrientation(orientation: Orientation[]): number {
-  let rank = 0;
-  for (let i = 5; i >= 0; i--) rank = rank * 3 + orientation[i];
-  return rank;
-}
-function unrankOrientation(rank: number): Eight<Orientation> {
-  const result: Orientation[] = [];
-  let sum = 0;
-  for (let i = 0; i < 6; i++) {
-    const digit = (rank % 3) as Orientation;
-    result.push(digit);
-    sum += digit;
-    rank = Math.floor(rank / 3);
-  }
-  return [...result, mod3(-sum), 0] as Eight<Orientation>;
-}
 const permutationNext = faces.map(() => new Uint16Array(5040));
 const orientationNext = faces.map(() => new Uint16Array(729));
 for (let p = 0; p < 5040; p++) {

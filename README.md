@@ -2,6 +2,10 @@
 
 原生 TypeScript + SVG 的角块交互模块，供 Astro/Starlight 博客嵌入，不是独立生产网站。运行时没有前端框架、后端或三维渲染依赖。本地旧投影实验不属于模块发布内容。
 
+仓库：<https://github.com/Hyperbolica-dev/cube> · [中文版体验](https://hyperbolica-dev.github.io/zh/fun/cube/) · [English demo](https://hyperbolica-dev.github.io/fun/cube/)
+
+新协作者或 LLM 从 [协作与接入指引](CONTRIBUTING.md) 开始。各自使用任务分支，通过 PR 交换成果与当前判断；Cube 合并不会自动更新博客的子模块引用。
+
 ## 博客集成
 
 宿主读取纯元数据 `src/module.ts` 的 `moduleMeta`：`id: 'cube'`、语言 `en` / `zh-CN`，以及两种语言的 `title` / `description`。此入口不引入 DOM、样式或 Astro。
@@ -99,3 +103,19 @@ npm run preview
 `npm run quality` 执行严格类型检查和上述验证。完整遍历使用排列与取向的紧凑编码，确认仅用 F/U/R 可达恰好 `7! × 3⁶ = 3,674,160` 个合法状态；穷举不会在页面启动时运行。
 
 GitHub Actions 只验证模型、类型并构建开发预览，不部署独立站点。博客固定引用模块提交，再统一构建、部署博客站点。
+
+## 复原方法研究
+
+本仓库还提供不进入页面运行时的局部操作研究：
+
+- [数学研究报告](docs/solving-method-research.md)：交换子、共轭、纯扭转、稳定子、缓冲反例及全状态覆盖证据。
+- [玩家教程](docs/solving-player-guide.md)：G 缓冲两公式法，以及步数更少的稳定子查表法。
+- [准备表](docs/solving-setup-tables.md)、[取向识别表](docs/solving-orientation-reference.md)、[稳定子修正表](docs/solving-stabilizer-tables.md)：程序生成的实际操作参考。
+- `research/local-operations.json`：精选操作数据库；其余 `research/*.json` 保存搜索与验证证据。
+
+```sh
+npm run research         # 有界搜索、生成数据/操作表并正式重放验证
+npm run research:verify  # 不重新搜索，仅检查数据与模型、作用和程序的一致性
+```
+
+研究命令建议 Node.js 22.13+；本次在 Linux / Node.js 24.18.0 上验证，稳定子脚本用 `/proc/self/status` 记录内存。统一运行器硬上限 600 秒，候选深度、数量、状态与内存另有边界。正常 `quality` / `build` 不运行这些研究搜索，也不将数据库或求解流程集成 UI。`scripts/research/codec.ts` 仅复用现有验证器的排列/取向编码，不维护另一套魔方规则。

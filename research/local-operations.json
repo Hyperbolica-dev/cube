@@ -1,0 +1,480 @@
+{
+  "schemaVersion": 1,
+  "model": {
+    "source": "src/cube.ts",
+    "sha256": "0fa4456c4677f33eb14b9a00b82695de98d92646298dae70801eb79bbc59d01f"
+  },
+  "convention": {
+    "execution": "left to right",
+    "destination": "source p goes to destination[p]",
+    "sourceTwist": "add to the old orientation at source p, then deposit at destination[p]",
+    "qtm": "F/U/R and inverse cost 1; half turn costs 2"
+  },
+  "qualityAssessment": "Memory/recognition assessments are structural judgments, not measured human-study results; no global shortest-word claim.",
+  "operations": [
+    {
+      "id": "S",
+      "structure": "[F,U]",
+      "sequence": "F U F' U'",
+      "length": 4,
+      "halfTurnLength": 4,
+      "destination": [
+        1,
+        0,
+        2,
+        3,
+        6,
+        5,
+        4,
+        7
+      ],
+      "permutation": [
+        [
+          "A",
+          "B"
+        ],
+        [
+          "E",
+          "G"
+        ]
+      ],
+      "support": [
+        "A",
+        "B",
+        "E",
+        "G"
+      ],
+      "fixed": [
+        "C",
+        "D",
+        "F",
+        "H"
+      ],
+      "order": 6,
+      "type": "curated-human-basis",
+      "explanation": "基础相消骨架；自身是双换位，不是三循环。",
+      "sourceTwist": [
+        0,
+        2,
+        0,
+        0,
+        2,
+        0,
+        2,
+        0
+      ],
+      "inverseSequence": "U F U' F'",
+      "recognition": "基础相消骨架；自身是双换位，不是三循环。",
+      "reversibility": "Reverse block order and invert every move; K⁻¹ undoes preparation.",
+      "reuse": "Reference or advanced last-three/last-pair operation."
+    },
+    {
+      "id": "P",
+      "structure": "[S,R]",
+      "sequence": "F U F' U' R U F U' F' R'",
+      "length": 10,
+      "halfTurnLength": 10,
+      "destination": [
+        1,
+        2,
+        0,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "permutation": [
+        [
+          "A",
+          "B",
+          "C"
+        ]
+      ],
+      "support": [
+        "A",
+        "B",
+        "C"
+      ],
+      "fixed": [
+        "D",
+        "E",
+        "F",
+        "G",
+        "H"
+      ],
+      "order": 3,
+      "type": "curated-human-basis",
+      "explanation": "工作台 A→B→C→A；只保护这三个槽位之外的完整状态。",
+      "sourceTwist": [
+        0,
+        1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "inverseSequence": "R F U F' U' R' U F U' F'",
+      "recognition": "工作台 A→B→C→A；只保护这三个槽位之外的完整状态。",
+      "reversibility": "Reverse block order and invert every move; K⁻¹ undoes preparation.",
+      "reuse": "Conjugate using the generated preparation tables."
+    },
+    {
+      "id": "T",
+      "structure": "[S²,R′]",
+      "sequence": "F U F' U' F U F' U' R' U F U' F' U F U' F' R",
+      "length": 18,
+      "halfTurnLength": 18,
+      "destination": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "permutation": [],
+      "support": [
+        "A",
+        "D"
+      ],
+      "fixed": [
+        "B",
+        "C",
+        "E",
+        "F",
+        "G",
+        "H"
+      ],
+      "order": 3,
+      "type": "curated-human-basis",
+      "explanation": "工作台 A−1、D+1；所有位置不变。",
+      "sourceTwist": [
+        2,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "inverseSequence": "R' F U F' U' F U F' U' R U F U' F' U F U' F'",
+      "recognition": "工作台 A−1、D+1；所有位置不变。",
+      "reversibility": "Reverse block order and invert every move; K⁻¹ undoes preparation.",
+      "reuse": "Conjugate using the generated preparation tables."
+    },
+    {
+      "id": "clean-3-cycle",
+      "structure": "[F²,[R,U′]]",
+      "sequence": "F2 R U' R' U F2 U' R U R'",
+      "length": 12,
+      "halfTurnLength": 10,
+      "destination": [
+        1,
+        6,
+        2,
+        3,
+        4,
+        5,
+        0,
+        7
+      ],
+      "permutation": [
+        [
+          "A",
+          "B",
+          "G"
+        ]
+      ],
+      "support": [
+        "A",
+        "B",
+        "G"
+      ],
+      "fixed": [
+        "C",
+        "D",
+        "E",
+        "F",
+        "H"
+      ],
+      "order": 3,
+      "type": "curated-human-basis",
+      "explanation": "零取向增量的 A→B→G→A，用于区分净三循环和干净三循环。",
+      "sourceTwist": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "inverseSequence": "R U' R' U F2 U' R U R' F2",
+      "recognition": "零取向增量的 A→B→G→A，用于区分净三循环和干净三循环。",
+      "reversibility": "Reverse block order and invert every move; K⁻¹ undoes preparation.",
+      "reuse": "Reference or advanced last-three/last-pair operation."
+    },
+    {
+      "id": "X",
+      "structure": "7 个四分之一转",
+      "sequence": "F U F U' R' F' R",
+      "length": 7,
+      "halfTurnLength": 7,
+      "destination": [
+        0,
+        2,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "permutation": [
+        [
+          "B",
+          "C"
+        ]
+      ],
+      "support": [
+        "A",
+        "B",
+        "C"
+      ],
+      "fixed": [
+        "D",
+        "E",
+        "F",
+        "G",
+        "H"
+      ],
+      "order": 6,
+      "type": "curated-human-basis",
+      "explanation": "最后 A/B/C 区域；交换 B/C，同时扭 A/B。",
+      "sourceTwist": [
+        1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "inverseSequence": "R' F R U F' U' F'",
+      "recognition": "最后 A/B/C 区域；交换 B/C，同时扭 A/B。",
+      "reversibility": "Reverse block order and invert every move; K⁻¹ undoes preparation.",
+      "reuse": "Reference or advanced last-three/last-pair operation."
+    },
+    {
+      "id": "Y",
+      "structure": "7 个四分之一转",
+      "sequence": "F' R' F R U F U'",
+      "length": 7,
+      "halfTurnLength": 7,
+      "destination": [
+        2,
+        1,
+        0,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "permutation": [
+        [
+          "A",
+          "C"
+        ]
+      ],
+      "support": [
+        "A",
+        "B",
+        "C"
+      ],
+      "fixed": [
+        "D",
+        "E",
+        "F",
+        "G",
+        "H"
+      ],
+      "order": 6,
+      "type": "curated-human-basis",
+      "explanation": "最后 A/B/C 区域；交换 A/C，同时扭 B/C。",
+      "sourceTwist": [
+        0,
+        1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "inverseSequence": "U F' U' R' F' R F",
+      "recognition": "最后 A/B/C 区域；交换 A/C，同时扭 B/C。",
+      "reversibility": "Reverse block order and invert every move; K⁻¹ undoes preparation.",
+      "reuse": "Reference or advanced last-three/last-pair operation."
+    },
+    {
+      "id": "Z",
+      "structure": "7 个四分之一转",
+      "sequence": "F' U F R U R' U'",
+      "length": 7,
+      "halfTurnLength": 7,
+      "destination": [
+        1,
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "permutation": [
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "support": [
+        "A",
+        "B",
+        "C"
+      ],
+      "fixed": [
+        "D",
+        "E",
+        "F",
+        "G",
+        "H"
+      ],
+      "order": 6,
+      "type": "curated-human-basis",
+      "explanation": "最后 A/B/C 区域；交换 A/B，三者均加 1。",
+      "sourceTwist": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "inverseSequence": "U R U' R' F' U' F",
+      "recognition": "最后 A/B/C 区域；交换 A/B，三者均加 1。",
+      "reversibility": "Reverse block order and invert every move; K⁻¹ undoes preparation.",
+      "reuse": "Reference or advanced last-three/last-pair operation."
+    },
+    {
+      "id": "a",
+      "structure": "Z Y⁻¹ X⁻¹，约简后 19 QTM",
+      "sequence": "F' U F R U R' F' U' R' F' R F R' F R U F' U' F'",
+      "length": 19,
+      "halfTurnLength": 19,
+      "destination": [
+        2,
+        1,
+        0,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "permutation": [
+        [
+          "A",
+          "C"
+        ]
+      ],
+      "support": [
+        "A",
+        "C"
+      ],
+      "fixed": [
+        "B",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H"
+      ],
+      "order": 2,
+      "type": "curated-human-basis",
+      "explanation": "完整保护 B/D/E/F/G/H 的干净 A/C 换位；不能只用交换子构成这个奇置换。",
+      "sourceTwist": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "inverseSequence": "F U F U' R' F' R F' R' F R U F R U' R' F' U' F",
+      "recognition": "完整保护 B/D/E/F/G/H 的干净 A/C 换位；不能只用交换子构成这个奇置换。",
+      "reversibility": "Reverse block order and invert every move; K⁻¹ undoes preparation.",
+      "reuse": "Reference or advanced last-three/last-pair operation."
+    },
+    {
+      "id": "c",
+      "structure": "(R′ F′) T (F R)，约简后 20 QTM",
+      "sequence": "R' U F' U' F U F' U' R' U F U' F' U F U' F' R F R",
+      "length": 20,
+      "halfTurnLength": 20,
+      "destination": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "permutation": [],
+      "support": [
+        "A",
+        "C"
+      ],
+      "fixed": [
+        "B",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H"
+      ],
+      "order": 3,
+      "type": "curated-human-basis",
+      "explanation": "完整保护 B/D/E/F/G/H 的 A−1、C+1，缩短稳定子链的最后收尾。",
+      "sourceTwist": [
+        2,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "inverseSequence": "R' F' R' F U F' U' F U F' U' R U F U' F' U F U' R",
+      "recognition": "完整保护 B/D/E/F/G/H 的 A−1、C+1，缩短稳定子链的最后收尾。",
+      "reversibility": "Reverse block order and invert every move; K⁻¹ undoes preparation.",
+      "reuse": "Reference or advanced last-three/last-pair operation."
+    }
+  ]
+}
